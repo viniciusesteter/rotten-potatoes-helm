@@ -1,0 +1,5 @@
+web:
+  replicas: 3
+  service: 
+    type: NodePort
+    nodePort: 30000

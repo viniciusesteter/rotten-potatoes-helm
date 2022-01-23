@@ -1,0 +1,14 @@
+mongodb:
+  image: mongo
+  tag: 5.0.5
+  user: mongouser
+  password: mongopwd
+
+web:
+  replicas: 2
+  image: viniciusesteter/rotten-potatoes
+  tag: latest
+  mongoDatabase: admin
+  service: 
+    type: LoadBalancer
+    nodePort: #30000  
