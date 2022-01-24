@@ -61,6 +61,34 @@ spec:
         image: viniciusesteter/rotten-potatoes:latest
         ports:
         - containerPort: 5000
+        # Boas práticas para Deplpy no Container 
+        # livenesseProbe para quando o CÓDIGO pode não estar saudável, sem precisar matar e subir o container na mão
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshould: 1
+        #ReadinessProbe para quando o container não está pronto.
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshould: 1
+        #resources:
+         # limits:
+          #  cpu: "0.2"
+          #  memory: "32Mi"
+         # requests:
+          #  cpu: "0.1"
+          #  memory: "24Mi"         
         env:
         - name: MONGODB_DB
           value: admin
@@ -72,7 +100,7 @@ spec:
           value: mongouser
         - name: MONGODB_PASSWORD
           value: mongopwd
-
+        
 ---
 
 # Service da aplicação web Rotten Potatoes

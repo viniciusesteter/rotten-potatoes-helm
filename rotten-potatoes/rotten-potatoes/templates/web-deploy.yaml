@@ -18,7 +18,7 @@ spec:
       - name: web
         image: {{ .Values.web.image }}:{{ .Values.web.tag }}
         ports:
-        - containerPort: 5000
+        - containerPort: 5000        
         env:
         - name: MONGODB_DB
           value: {{ .Values.web.mongoDatabase }}
@@ -30,3 +30,31 @@ spec:
           value: {{ .Values.mongodb.user }}
         - name: MONGODB_PASSWORD
           value: {{ .Values.mongodb.password }}
+        # Boas práticas para Deplpy no Container 
+        # livenesseProbe para quando o CÓDIGO pode não estar saudável, sem precisar matar e subir o container na mão
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+        #ReadinessProbe para quando o container não está pronto.
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+        #resources:
+         # limits:
+          #  cpu: "0.2"
+          #  memory: "32Mi"
+         # requests:
+          #  cpu: "0.1"
+          #  memory: "24Mi"         
