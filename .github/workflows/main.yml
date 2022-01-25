@@ -40,9 +40,9 @@ jobs:
         uses: wiremind/helm-kubeval-action@v1.2.1
         with:
     # The path to the directory containing your Chart(s)
-          path: ./rotten-potetoes/rotten-potetoes
+          path: ./rotten-potatoes/rotten-potatoes
     # The path to the configuration file containing your Chart(s) Repository Url(s)
-          config: ./rotten-potetoes/rotten-potetoes/config_repos
+          config: ./rotten-potatoes/rotten-potatoes/config_repos
     # Output format for results
           output: stdout
     # Version of Kubernetes to validate against
