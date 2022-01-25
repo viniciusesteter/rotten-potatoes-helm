@@ -26,7 +26,7 @@ spec:
 
 ---
 
-# Service do MongoDB #
+# Service do MongoDB
 
 apiVersion: v1
 kind: Service
@@ -69,7 +69,7 @@ spec:
         - name: MONGODB_PORT
           value: "27017"
         - name: MONGODB_USERNAME
-          value: mogouser
+          value: mongouser
         - name: MONGODB_PASSWORD
           value: mongopwd
         # Boas práticas para Deplpy no Container 
@@ -100,7 +100,6 @@ spec:
          # requests:
           #  cpu: "0.1"
           #  memory: "24Mi"         
-
 
 ---
 # Service da aplicação web Rotten Potatoes
