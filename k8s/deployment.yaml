@@ -60,7 +60,18 @@ spec:
       - name: web
         image: viniciusesteter/rotten-potatoes:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 5000        
+        env:
+        - name: MONGODB_DB
+          value: admin
+        - name: MONGODB_HOST
+          value: mongodb
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_USERNAME
+          value: mogouser
+        - name: MONGODB_PASSWORD
+          value: mongopwd
         # Boas práticas para Deplpy no Container 
         # livenesseProbe para quando o CÓDIGO pode não estar saudável, sem precisar matar e subir o container na mão
         livenessProbe:
@@ -71,7 +82,7 @@ spec:
           periodSeconds: 3
           timeoutSeconds: 1
           successThreshold: 1
-          failureThreshould: 1
+          failureThreshold: 1
         #ReadinessProbe para quando o container não está pronto.
         readinessProbe:
           httpGet:
@@ -81,28 +92,17 @@ spec:
           periodSeconds: 3
           timeoutSeconds: 1
           successThreshold: 1
-          failureThreshould: 1
-        #resources:
+          failureThreshold: 1
+        ##resources:
          # limits:
           #  cpu: "0.2"
           #  memory: "32Mi"
          # requests:
           #  cpu: "0.1"
           #  memory: "24Mi"         
-        env:
-        - name: MONGODB_DB
-          value: admin
-        - name: MONGODB_HOST
-          value: mongodb
-        - name: MONGODB_PORT
-          value: "27017"
-        - name: MONGODB_USERNAME
-          value: mongouser
-        - name: MONGODB_PASSWORD
-          value: mongopwd
-        
----
 
+
+---
 # Service da aplicação web Rotten Potatoes
 
 apiVersion: v1
