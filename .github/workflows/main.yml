@@ -38,9 +38,9 @@ jobs:
     # The kind version to use (default: v0.11.1)
           version: v0.11.1
     # The path to the kind config file
-          config: ./k8s
+          config: rotten-potatoes/rotten-potatoes/templates
     # The Docker image for the cluster nodes
-          node_image: viniciusesteter/rotten-potatoes:latest
+          node_image: viniciusesteter/rotten-potatoes:${{ github.run_number }}
     # The name of the cluster to create (default: chart-testing)
           cluster_name: Helm-Cluster
     # The duration to wait for the control plane to become ready (default: 60s)
