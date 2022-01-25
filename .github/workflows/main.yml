@@ -34,22 +34,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Kubernetes Helm Kubeval
-  # You may pin to the exact commit or the version.
-  # uses: wiremind/helm-kubeval-action@eff33cfdeb169620c03661bf6dee4257775eb047
-        uses: wiremind/helm-kubeval-action@v1.2.1
+      - name: Kubernetes Set Context
+        uses: Azure/k8s-set-context@v2
         with:
-    # The path to the directory containing your Chart(s)
-          path: ./rotten-potatoes/rotten-potatoes
-    # The path to the configuration file containing your Chart(s) Repository Url(s)
-          config: ./rotten-potatoes/rotten-potatoes/config_repos
-    # Output format for results
-          output: stdout
-    # Version of Kubernetes to validate against
-          version: master
-    # Whether to not to check for extra properties
-          strict: true
-    # Whether to use the schemas from OpenShift rather than Kubernetes
-          openshift: false
-    # Whether or not to skip custom resources
-          ignore_missing_schemas: true
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}
+
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v1.5
+        with:
+          images: viniciusesteter/rotten-potatoes:${{ github.run_number }}
+          manifests: |
+            k8s/deployment.yaml
