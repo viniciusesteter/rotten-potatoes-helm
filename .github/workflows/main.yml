@@ -32,17 +32,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Kubernetes Set Context
-        uses: Azure/k8s-set-context@v2
+      - name: Kind Cluster
+        uses: helm/kind-action@v1.2.0
         with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}
-
-      - name: Deploy to Kubernetes cluster
-        uses: Azure/k8s-deploy@v1.5
-        with:
-          images: viniciusesteter/rotten-potatoes:${{ github.run_number }}
-          manifests: |
-            k8s/deployment.yaml
+    # The kind version to use (default: v0.11.1)
+          version: v0.11.1
+    # The path to the kind config file
+          config: ./rotten-potatoes/rotten-potatoes
+    # The Docker image for the cluster nodes
+          node_image: viniciusesteter/rotten-potatoes:latest
+    # The name of the cluster to create (default: chart-testing)
+          cluster_name: Helm-Cluster
+    # The duration to wait for the control plane to become ready (default: 60s)
+          wait: 60s
+    # The log level for kind
+          log_level: 0
+     
