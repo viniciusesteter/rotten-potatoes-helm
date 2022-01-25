@@ -42,7 +42,7 @@ jobs:
     # The path to the directory containing your Chart(s)
           path: ./rotten-potetoes/rotten-potetoes
     # The path to the configuration file containing your Chart(s) Repository Url(s)
-          config: ./rotten-potetoes/rotten-potetoes/templates
+          config: ./rotten-potetoes/rotten-potetoes/config_repos
     # Output format for results
           output: stdout
     # Version of Kubernetes to validate against
