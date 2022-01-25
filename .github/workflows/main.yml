@@ -38,7 +38,7 @@ jobs:
     # The kind version to use (default: v0.11.1)
           version: v0.11.1
     # The path to the kind config file
-          config: ./rotten-potatoes/rotten-potatoes/templates/web-deploy.yaml
+          config: ./k8s
     # The Docker image for the cluster nodes
           node_image: viniciusesteter/rotten-potatoes:latest
     # The name of the cluster to create (default: chart-testing)
